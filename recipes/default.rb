@@ -1,0 +1,98 @@
+#
+# Cookbook Name:: phpmyadmin
+# Recipe:: default
+#
+# Copyright 2012, Panagiotis Papadomitsos
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+home = node['phpmyadmin']['home']
+user = node['phpmyadmin']['user']
+group = node['phpmyadmin']['group']
+conf = "#{home}/config.inc.php"
+
+group group do
+	action [ :create, :manage ]
+end
+
+user user do
+	action [ :create, :manage ]
+	comment 'PHPMyAdmin User'
+	gid group
+	home home
+	shell '/usr/sbin/nologin'
+	supports :manage_home => true 
+end
+
+[ home, "#{home}/conf.d", node['phpmyadmin']['upload_dir'], node['phpmyadmin']['save_dir'] ].each do |dir|
+	directory dir do
+		owner user
+		group group
+		if ((node['phpmyadmin']['fpm'] == false) && ((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir'])))
+			mode 00777
+		else
+			mode 00755
+		end
+		recursive true
+		action :create
+	end
+end
+
+# Download the selected PHPMyAdmin archive
+remote_file "#{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz" do
+  owner user
+  group group
+  mode 00644
+  source "#{node['phpmyadmin']['mirror']}/#{node['phpmyadmin']['version']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz"
+  checksum node['phpmyadmin']['checksum']
+end
+
+bash "extract-php-myadmin" do
+	user user
+	group group
+	cwd home
+	code <<-EOH
+		rm -fr *
+		tar xzf #{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz
+		mv phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages/* #{home}/
+		rmdir phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages
+	EOH
+	creates	"#{home}/RELEASE-DATE-#{node['phpmyadmin']['version']}"
+end
+
+template "#{home}/config.inc.php" do
+	source 'config.inc.php.erb'
+	owner user
+	group group
+	mode 00644
+end
+
+if ((defined?(node['phpmyadmin']['fpm'])) && (node['phpmyadmin']['fpm']))
+ 	php_fpm 'phpmyadmin' do
+	  action :add
+	  user user
+	  group group
+	  socket true
+	  socket_path node['phpmyadmin']['socket']
+	  socket_perms "0666"
+	  start_servers 2
+	  min_spare_servers 2
+	  max_spare_servers 8
+	  max_children 8
+	  terminate_timeout (node['php']['ini_settings']['max_execution_time'].to_i + 20)
+	  value_overrides({ 
+	    :error_log => "#{node['php']['fpm_log_dir']}/phpmyadmin.log"
+	  })
+	end
+end
