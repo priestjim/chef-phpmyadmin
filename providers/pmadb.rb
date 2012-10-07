@@ -40,7 +40,7 @@ action :create do
 		user 'root'
 		group 'root'
 		cwd Chef::Config['file_cache_path']
-		command %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} < #{Chef::Config['file_cache_path']}/phpmyadmin.sql }
+		command %Q{ mysql -u '#{new_resource.root_username}' -p'#{new_resource.root_password}' -h '#{new_resource.host}' -P#{new_resource.port} < #{Chef::Config['file_cache_path']}/phpmyadmin.sql }
 		action :nothing
 	end
 
@@ -58,15 +58,15 @@ action :delete do
 	new_resource.updated_by_last_action(false)
 
 	execute "drop-pma-user-for-#{new_resource.name}" do
-		command %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} -e 'DELETE FROM `mysql`.`user` WHERE `User` = "#{new_resource.pma_username}"' }
-		not_if %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} -e 'SHOW GRANTS FOR "#{new_resource.pma_username}"@"%"' }
+		command %Q{ mysql -u'#{new_resource.root_username}' -p'#{new_resource.root_password}' -h '#{new_resource.host}' -P#{new_resource.port} -e 'DELETE FROM `mysql`.`user` WHERE `User` = "#{new_resource.pma_username}"' }
+		not_if %Q{ mysql -u'#{new_resource.root_username}' -p'#{new_resource.root_password}' -h '#{new_resource.host}' -P#{new_resource.port} -e 'SHOW GRANTS FOR "#{new_resource.pma_username}"@"%"' }
 		action :run
 		notifies :run, "execute[drop-pma-database-for-#{new_resource.name}]"
 	end
 
 	execute "drop-pma-database-for-#{new_resource.name}" do
-		command %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} -e 'DROP DATABASE #{new_resource.pma_database}' }
-		not_if %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} -e 'SHOW DATABASES LIKE "#{new_resource.pma_database}"' }
+		command %Q{ mysql -u'#{new_resource.root_username}' -p'#{new_resource.root_password}' -h '#{new_resource.host}' -P#{new_resource.port} -e 'DROP DATABASE #{new_resource.pma_database}' }
+		not_if %Q{ mysql -u'#{new_resource.root_username}' -p'#{new_resource.root_password}' -h '#{new_resource.host}' -P#{new_resource.port} -e 'SHOW DATABASES LIKE "#{new_resource.pma_database}"' }
 		action :nothing
 	end
 
