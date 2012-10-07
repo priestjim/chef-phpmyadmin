@@ -7,9 +7,9 @@ version          "1.0.0"
 
 depends "php"
 
-suggests "nginx"
-suggests "percona"
-suggests "apache2"
+recommends "nginx"
+recommends "percona"
+recommends "apache2"
 
 %w{ ubuntu debian redhat fedora centos }.each do |os|
   supports os
@@ -33,7 +33,7 @@ attribute "phpmyadmin/mirror",
 attribute "phpmyadmin/fpm",
   :display_name => "PHPMyAdmin FPM instance",
   :description => "Enables the PMA FPM instance for serving via NGINX",
-  :default => true
+  :default => "true"
 
 attribute "phpmyadmin/home",
   :display_name => "PHPMyAdmin home",
@@ -63,17 +63,17 @@ attribute "phpmyadmin/blowfish_secret",
 attribute "phpmyadmin/upload_dir",
   :display_name => "PHPMyAdmin upload directory",
   :description => "The directory PMA will be using for uploads",
-  :default => "/var/lib/php/uploads"
+  :calculated => true
 
 attribute "phpmyadmin/save_dir",
   :display_name => "PHPMyAdmin save directory",
   :description => "The directory PMA will be using for file saves",
-  :default => "/var/lib/php/uploads"
+  :calculated => true
 
 attribute "phpmyadmin/maxrows",
   :display_name => "PHPMyAdmin maximum rows",
   :description => "The maximum rows PMA shall display in a table view",
-  :default => 100
+  :default => "100"
 
 attribute "phpmyadmin/protect_binary",
   :display_name => "PHPMyAdmin binary field protection",
@@ -88,9 +88,9 @@ attribute "phpmyadmin/default_lang",
 attribute "phpmyadmin/query_history",
   :display_name => "PHPMyAdmin query history",
   :description => "Enable or disable the Javascript query history",
-  :default => true
+  :default => "true"
 
 attribute "phpmyadmin/query_history_size",
   :display_name => "PHPMyAdmin query history size",
   :description => "Set the maximum size of the Javascript query history",
-  :default => 100
+  :default => "100"
