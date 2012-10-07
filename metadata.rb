@@ -55,11 +55,6 @@ attribute "phpmyadmin/socket",
   :description => "The socket that FPM will be exposing for PMA",
   :default => "/tmp/phpmyadmin.sock"
 
-attribute "phpmyadmin/blowfish_secret",
-  :display_name => "PHPMyAdmin blowfish secret",
-  :description => "The PMA blowfish secret",
-  :default => "10684aa5cd1ccf0a7fe82c3b4e7102bb"
-
 attribute "phpmyadmin/upload_dir",
   :display_name => "PHPMyAdmin upload directory",
   :description => "The directory PMA will be using for uploads",
