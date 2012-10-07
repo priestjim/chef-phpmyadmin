@@ -48,7 +48,6 @@ This cookbook supports the following attributes:
 * `user`: The user PMA runs as
 * `group`: The group PMA runs as
 * `socket`: The socket that FPM will be exposing for PMA
-* `blowfish_secret`: The PMA blowfish secret
 * `upload_dir`: The directory PMA will be using for uploads
 * `save_dir`: The directory PMA will be using for file saves
 * `maxrows`: The maximum rows PMA shall display in a table view
@@ -59,6 +58,8 @@ This cookbook supports the following attributes:
 
 LWRP Methods
 ============
+
+## phpmyadmin_db
 
 This cookbook defines a phpmyadmin_db LWRP for dynamic DB definitions. This LWRP allows the following methods:
 
@@ -71,6 +72,18 @@ This cookbook defines a phpmyadmin_db LWRP for dynamic DB definitions. This LWRP
 * `pma_username`: If you have configured your database server for PMA, you can define here the PMA username
 * `pma_password`: If you have configured your database server for PMA, you can define here the PMA password
 * `pma_database`: If you have configured your database server for PMA, you can define here the PMA database name
+
+## phpmyadmin_pmadb
+
+This cookbook defines a phpmyadmin_pmadb LWRP for dynamically defining the control databases of PHPMyAdmin for earch server. This LWRP allows the following methods:
+
+* `host`: The database host. It can be either a hostname or an IP. This is the **name attribute**
+* `name`: This is the name of the PMA control database.
+* `port`: The database port.
+* `root_username`: The root username (root or admin usually) in order to create the database and needed privileges.
+* `root_password`: The root password
+* `pma_username`: The PMA control database username
+* `pma_password`: The PMA control database password
 
 Usage
 =====

@@ -28,8 +28,6 @@ default['phpmyadmin']['user'] = 'phpmyadmin'
 default['phpmyadmin']['group'] = 'phpmyadmin'
 default['phpmyadmin']['socket'] = '/tmp/phpmyadmin.sock'
 
-default['phpmyadmin']['blowfish_secret'] = '10684aa5cd1ccf0a7fe82c3b4e7102bb'
-
 case node['platform']
 when 'ubuntu', 'debian'
 	default['phpmyadmin']['upload_dir'] = '/var/lib/php5/uploads'

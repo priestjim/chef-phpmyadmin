@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+require 'digest/sha1'
+
 home = node['phpmyadmin']['home']
 user = node['phpmyadmin']['user']
 group = node['phpmyadmin']['group']
@@ -71,6 +73,9 @@ bash "extract-php-myadmin" do
 	creates	"#{home}/RELEASE-DATE-#{node['phpmyadmin']['version']}"
 end
 
+# Blowfish Secret
+node.set_unless['phpmyadmin']['blowfish_secret'] = Digest::SHA1.hexdigest(IO.read('/dev/urandom', 2048))
+node.save
 template "#{home}/config.inc.php" do
 	source 'config.inc.php.erb'
 	owner user
