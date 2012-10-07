@@ -21,7 +21,7 @@ action :create do
 	Chef::Log.info("Creating PHPMyAdmin control database for: #{new_resource.name}")
 	new_resource.updated_by_last_action(false)
 
-	template "#{Chef::Config['file_cache_path']}/phpmyadmin.sql" do
+	template "#{Chef::Config['file_cache_path']}/phpmyadmin-#{new_resource.host}.sql" do
 		cookbook 'phpmyadmin'
 		source 'phpmyadmin.sql.erb'
 		owner 'root'
@@ -40,7 +40,7 @@ action :create do
 		user 'root'
 		group 'root'
 		cwd Chef::Config['file_cache_path']
-		command %Q{ mysql -u '#{new_resource.root_username}' -p'#{new_resource.root_password}' -h '#{new_resource.host}' -P#{new_resource.port} < #{Chef::Config['file_cache_path']}/phpmyadmin.sql }
+		command %Q{ mysql -u '#{new_resource.root_username}' -p'#{new_resource.root_password}' -h '#{new_resource.host}' -P#{new_resource.port} < #{Chef::Config['file_cache_path']}/phpmyadmin-#{new_resource.host}.sql }
 		action :nothing
 	end
 
