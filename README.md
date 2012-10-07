@@ -55,7 +55,7 @@ This cookbook supports the following attributes:
 * `protect_binary`: Define the binary field protection PMA will be using
 * `default_lang`: The default language PMA will be using
 * `query_history`: Enable or disable the Javascript query history
-* `query\_history\_size`: Set the maximum size of the Javascript query history
+* `query_history_size`: Set the maximum size of the Javascript query history
 
 LWRP Methods
 ============
