@@ -69,19 +69,20 @@ This cookbook defines a phpmyadmin_db LWRP for dynamic DB definitions. This LWRP
 * `username`: The database username.
 * `password`: The database password
 * `hide_dbs`: An array of databases we do not want to be shown. This will be concatenated in a form of '^db1|db2$' etc.
+* `pma_database`: If you have configured your database server for PMA, you can define here the PMA database name
 * `pma_username`: If you have configured your database server for PMA, you can define here the PMA username
 * `pma_password`: If you have configured your database server for PMA, you can define here the PMA password
-* `pma_database`: If you have configured your database server for PMA, you can define here the PMA database name
 
 ## phpmyadmin_pmadb
 
 This cookbook defines a phpmyadmin_pmadb LWRP for dynamically defining the control databases of PHPMyAdmin for earch server. This LWRP allows the following methods:
 
-* `host`: The database host. It can be either a hostname or an IP. This is the **name attribute**
-* `name`: This is the name of the PMA control database.
+* `name`: The block name. Define it for uniqueness. This is the **name attribute**
+* `host`: The database host. It can be either a hostname or an IP.
 * `port`: The database port.
 * `root_username`: The root username (root or admin usually) in order to create the database and needed privileges.
 * `root_password`: The root password
+* `pma_database`: This is the name of the PMA control database.
 * `pma_username`: The PMA control database username
 * `pma_password`: The PMA control database password
 
