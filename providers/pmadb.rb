@@ -22,9 +22,10 @@ action :create do
 	new_resource.updated_by_last_action(false)
 
 	template "#{Chef::Config['file_cache_path']}/phpmyadmin.sql" do
-		source "phpmyadmin.sql.erb"
-		owner "root"
-		group "root"
+		cookbook 'phpmyadmin'
+		source 'phpmyadmin.sql.erb'
+		owner 'root'
+		group 'root'
 		mode 00644
 		variables({
 			:pma_db => new_resource.pma_database,
@@ -36,8 +37,8 @@ action :create do
 	end
 	
 	execute "create-pma-database-for-#{new_resource.name}" do
-		user "root"
-		group "root"
+		user 'root'
+		group 'root'
 		cwd Chef::Config['file_cache_path']
 		command %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} < #{Chef::Config['file_cache_path']}/phpmyadmin.sql }
 		action :nothing
