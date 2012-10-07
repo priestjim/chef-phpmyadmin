@@ -40,87 +40,37 @@ Attributes
 
 This cookbook supports the following attributes:
 
-## version
-The desired PMA version
-
-## checksum
-The sha256 checksum of the PMA desired version
-
-## mirror
-The desired PMA download mirror
-
-## fpm
-Enables the PMA FPM instance for serving via NGINX
-
-## home
-The desired PMA installation home
-
-## user
-The user PMA runs as
-
-## group
-The group PMA runs as
-
-## socket
-The socket that FPM will be exposing for PMA
-
-## blowfish_secret
-The PMA blowfish secret
-
-## upload_dir
-The directory PMA will be using for uploads
-
-## save_dir
-The directory PMA will be using for file saves
-
-## maxrows
-The maximum rows PMA shall display in a table view
-
-## protect_binary
-Define the binary field protection PMA will be using
-
-## default_lang
-The default language PMA will be using
-
-## query_history
-Enable or disable the Javascript query history
-
-## query_history_size
-Set the maximum size of the Javascript query history
+* `version`: The desired PMA version
+* `checksum`: The sha256 checksum of the PMA desired version
+* `mirror`: The desired PMA download mirror
+* `fpm`: Enables the PMA FPM instance for serving via NGINX
+* `home`: The desired PMA installation home
+* `user`: The user PMA runs as
+* `group`: The group PMA runs as
+* `socket`: The socket that FPM will be exposing for PMA
+* `blowfish_secret`: The PMA blowfish secret
+* `upload_dir`: The directory PMA will be using for uploads
+* `save_dir`: The directory PMA will be using for file saves
+* `maxrows`: The maximum rows PMA shall display in a table view
+* `protect_binary`: Define the binary field protection PMA will be using
+* `default_lang`: The default language PMA will be using
+* `query_history`: Enable or disable the Javascript query history
+* `query\_history\_size`: Set the maximum size of the Javascript query history
 
 LWRP Methods
 ============
 
 This cookbook defines a phpmyadmin_db LWRP for dynamic DB definitions. This LWRP allows the following methods:
 
-## name
-This is the description of the defined database. It also gets converted to lowercase and spaces substituted to underscores for the database filename.
-
-This is the **name attribute**
-
-## host
-The database host. It can be either a hostname or an IP.
-
-## port
-The database port.
-
-## username
-The database username.
-
-## password
-The database password
-
-## hide_dbs
-An array of databases we do not want to be shown. This will be concatenated in a form of '^db1|db2$' etc.
-
-## pma_username
-If you have configured your database server for PMA, you can define here the PMA username
-
-## pma_password
-If you have configured your database server for PMA, you can define here the PMA password
-
-## pma_database
-If you have configured your database server for PMA, you can define here the PMA database name
+* `name`: This is the description of the defined database. It also gets converted to lowercase and spaces substituted to underscores for the database filename. This is the **name attribute**
+* `host`: The database host. It can be either a hostname or an IP.
+* `port`: The database port.
+* `username`: The database username.
+* `password`: The database password
+* `hide_dbs`: An array of databases we do not want to be shown. This will be concatenated in a form of '^db1|db2$' etc.
+* `pma_username`: If you have configured your database server for PMA, you can define here the PMA username
+* `pma_password`: If you have configured your database server for PMA, you can define here the PMA password
+* `pma_database`: If you have configured your database server for PMA, you can define here the PMA database name
 
 Usage
 =====
@@ -144,4 +94,14 @@ License
 
 Copyright 2012 Panagiotis Papadomitsos.
 
-Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
