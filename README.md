@@ -33,7 +33,7 @@ This cookbook supports the following Linux distributions:
 * CentOS
 * RedHat
 
-It also supports *Chef 10.14* and higher
+It also supports **Chef 10.14** and higher
 
 Attributes
 ==========
