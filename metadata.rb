@@ -8,8 +8,10 @@ version          "1.0.1"
 depends "php"
 
 recommends "nginx"
-recommends "percona"
 recommends "apache2"
+
+suggests "percona"
+suggests "mysql"
 
 %w{ ubuntu debian redhat fedora centos }.each do |os|
   supports os
