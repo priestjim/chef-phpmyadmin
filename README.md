@@ -138,3 +138,10 @@ To define a database config you can use the phpmyadmin_db LWRP such as:
 	end
 
 This will create a file in /opt/phpmyadmin/conf.d/test_db.inc.php and will be automatically included when you display the PMA page.
+
+License
+=======
+
+Copyright 2012 Panagiotis Papadomitsos.
+
+Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
