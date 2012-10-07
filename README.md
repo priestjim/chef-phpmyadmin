@@ -96,7 +96,7 @@ This cookbook defines a phpmyadmin_db LWRP for dynamic DB definitions. This LWRP
 ## name
 This is the description of the defined database. It also gets converted to lowercase and spaces substituted to underscores for the database filename.
 
-This is the *name* *attribute*
+This is the **name attribute**
 
 ## host
 The database host. It can be either a hostname or an IP.
