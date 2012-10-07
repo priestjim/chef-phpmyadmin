@@ -18,7 +18,7 @@
 #
 
 action :create do
-	Chef::Log.info("Creating PHPMyAdmin control database for: #{new_resource.host}")
+	Chef::Log.info("Creating PHPMyAdmin control database for: #{new_resource.name}")
 	new_resource.updated_by_last_action(false)
 
 	template "#{Chef::Config['file_cache_path']}/phpmyadmin.sql" do
@@ -27,45 +27,45 @@ action :create do
 		group "root"
 		mode 00644
 		variables({
-			:pma_db => new_resource.name,
-			:pma_user => new_resource.pma_user,
-			:pma_pass => new_resource.pma_pass
+			:pma_db => new_resource.pma_database,
+			:pma_user => new_resource.pma_username,
+			:pma_pass => new_resource.pma_password
 		})
 		action :run
-		notifies :run, "execute[create-pma-database-for-#{new_resource.host}]"
+		notifies :run, "execute[create-pma-database-for-#{new_resource.name}]"
 	end
 	
-	execute "create-pma-database-for-#{new_resource.host}" do
+	execute "create-pma-database-for-#{new_resource.name}" do
 		user "root"
 		group "root"
 		cwd Chef::Config['file_cache_path']
-		command %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} < Chef::Config['file_cache_path']/phpmyadmin.sql }
+		command %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} < #{Chef::Config['file_cache_path']}/phpmyadmin.sql }
 		action :nothing
 	end
 
-	ruby_block "phpmyadmin-create-control-#{new_resource.host}" do
+	ruby_block "phpmyadmin-create-control-#{new_resource.name}" do
 		block do
 			new_resource.updated_by_last_action(true)
 		end
 		action :nothing
-		subscribes :create, "execute[create-pma-database-for-#{new_resource.host}]"
+		subscribes :create, "execute[create-pma-database-for-#{new_resource.name}]"
 	end	
 end
 
 action :delete do
-	Chef::Log.info("Removing PHPMyAdmin control database for: #{new_resource.host}")
+	Chef::Log.info("Removing PHPMyAdmin control database for: #{new_resource.name}")
 	new_resource.updated_by_last_action(false)
 
-	execute "drop-pma-user-for-#{new_resource.host}" do
+	execute "drop-pma-user-for-#{new_resource.name}" do
 		command %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} -e 'DELETE FROM `mysql`.`user` WHERE `User` = "#{new_resource.pma_username}"' }
 		not_if %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} -e 'SHOW GRANTS FOR "#{new_resource.pma_username}"@"%"' }
 		action :run
-		notifies :run, "execute[drop-pma-database-for-#{new_resource.host}]"
+		notifies :run, "execute[drop-pma-database-for-#{new_resource.name}]"
 	end
 
-	execute "drop-pma-database-for-#{new_resource.host}" do
-		command %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} -e 'DROP DATABASE #{new_resource.name}' }
-		not_if %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} -e 'SHOW DATABASES LIKE "#{new_resource.name}"' }
+	execute "drop-pma-database-for-#{new_resource.name}" do
+		command %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} -e 'DROP DATABASE #{new_resource.pma_database}' }
+		not_if %Q{ mysql -u#{new_resource.root_username} -p#{new_resource.root_password} -h#{new_resource.host} -P#{new_resource.port} -e 'SHOW DATABASES LIKE "#{new_resource.pma_database}"' }
 		action :nothing
 	end
 
@@ -74,6 +74,6 @@ action :delete do
 			new_resource.updated_by_last_action(true)
 		end
 		action :nothing
-		subscribes :create, "execute[drop-pma-database-for-#{new_resource.host}]"
+		subscribes :create, "execute[drop-pma-database-for-#{new_resource.name}]"
 	end	
 end

@@ -21,10 +21,11 @@ default_action :create
 
 actions :create, :delete
 
-attribute :host,	 		:regex => /[a-zA-z0-9\.\-]+/, :required => true, :name_attribute => true
-attribute :name,			:kind_of => String, :required => true
+attribute :name,			:kind_of => String, :required => true, :name_attribute => true
+attribute :host,	 		:regex => /[a-zA-z0-9\.\-]+/, :required => true
 attribute :port,			:kind_of => Fixnum, :default => 3306
 attribute :root_username,	:kind_of => String, :required => true
 attribute :root_password,	:kind_of => String, :required => true
+attribute :pma_database,	:kind_of => String, :required => true
 attribute :pma_username,	:kind_of => String, :required => true
 attribute :pma_password,	:kind_of => String, :required => true
