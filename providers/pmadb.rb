@@ -31,7 +31,7 @@ action :create do
 			:pma_user => new_resource.pma_username,
 			:pma_pass => new_resource.pma_password
 		})
-		action :run
+		action :create
 		notifies :run, "execute[create-pma-database-for-#{new_resource.name}]"
 	end
 	
