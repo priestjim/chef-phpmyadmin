@@ -70,7 +70,7 @@ bash "extract-php-myadmin" do
 		mv phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages/* #{home}/
 		rmdir phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages
 	EOH
-	creates	"#{home}/RELEASE-DATE-#{node['phpmyadmin']['version']}"
+	not_if { ::File.exists?("#{home}/RELEASE-DATE-#{node['phpmyadmin']['version']}")}
 end
 
 # Blowfish Secret
