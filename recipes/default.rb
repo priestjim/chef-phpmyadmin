@@ -42,7 +42,7 @@ end
 		owner user
 		group group
 		if ((node['phpmyadmin']['fpm'] == false) && ((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir'])))
-			mode 00777
+			mode 01777
 		else
 			mode 00755
 		end
