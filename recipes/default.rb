@@ -39,11 +39,13 @@ end
 
 [ home, "#{home}/conf.d", node['phpmyadmin']['upload_dir'], node['phpmyadmin']['save_dir'] ].each do |dir|
 	directory dir do
-		owner user
-		group group
 		if ((node['phpmyadmin']['fpm'] == false) && ((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir'])))
+			owner "root"
+			group "root"
 			mode 01777
 		else
+			owner user
+			group group			
 			mode 00755
 		end
 		recursive true
