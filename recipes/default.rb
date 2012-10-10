@@ -39,7 +39,7 @@ end
 
 [ home, "#{home}/conf.d", node['phpmyadmin']['upload_dir'], node['phpmyadmin']['save_dir'] ].each do |dir|
 	directory dir do
-		if ((node['phpmyadmin']['fpm'] == false) && ((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir'])))
+		if ((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir']))
 			owner "root"
 			group "root"
 			mode 01777
