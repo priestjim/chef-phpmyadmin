@@ -37,15 +37,25 @@ user user do
 	supports :manage_home => true 
 end
 
-[ home, "#{home}/conf.d", node['phpmyadmin']['upload_dir'], node['phpmyadmin']['save_dir'] ].each do |dir|
+[ home, "#{home}/conf.d" ].each do |dir|
 	directory dir do
-		owner(((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir']))	? "root" : user)
-		group(((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir']))	? "root" : group)
-		mode(((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir']))	? 01777 : 00755)
+		owner user
+		group group
+		mode 00755
 		recursive true
 		action :create
 	end
 end
+
+[ node['phpmyadmin']['upload_dir'], node['phpmyadmin']['save_dir'] ].each do |dir|
+	directory dir do
+		owner "root"
+		group "root"
+		mode 01777
+		recursive true
+		action :create
+	end
+end	
 
 # Download the selected PHPMyAdmin archive
 remote_file "#{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz" do
