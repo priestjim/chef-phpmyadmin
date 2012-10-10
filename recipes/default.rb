@@ -39,9 +39,9 @@ end
 
 [ home, "#{home}/conf.d", node['phpmyadmin']['upload_dir'], node['phpmyadmin']['save_dir'] ].each do |dir|
 	directory dir do
-		owner ((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir']))	? "root" : user
-		group ((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir']))	? "root" : group
-		mode ((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir']))	? 01777 : 00755
+		owner(((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir']))	? "root" : user)
+		group(((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir']))	? "root" : group)
+		mode(((dir == node['phpmyadmin']['upload_dir']) || (dir = node['phpmyadmin']['save_dir']))	? 01777 : 00755)
 		recursive true
 		action :create
 	end
