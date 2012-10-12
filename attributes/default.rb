@@ -39,5 +39,6 @@ end
 default['phpmyadmin']['maxrows'] = 100
 default['phpmyadmin']['protect_binary'] = 'blob'
 default['phpmyadmin']['default_lang'] = 'en'
+default['phpmyadmin']['default_display'] = 'horizontal'
 default['phpmyadmin']['query_history'] = true
 default['phpmyadmin']['query_history_size'] = 100
