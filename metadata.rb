@@ -82,6 +82,11 @@ attribute "phpmyadmin/default_lang",
   :description => "The default language PMA will be using",
   :default => "en"
 
+attribute "phpmyadmin/default_display",
+  :display_name => "PHPMyAdmin default row display",
+  :description => "The default display of rows inside PMA",
+  :default => "horizontal"
+
 attribute "phpmyadmin/query_history",
   :display_name => "PHPMyAdmin query history",
   :description => "Enable or disable the Javascript query history",

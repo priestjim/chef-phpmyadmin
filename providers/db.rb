@@ -22,7 +22,7 @@ action :create do
 	new_resource.hide_dbs = [ new_resource.hide_dbs ] if new_resource.hide_dbs.instance_of?(String)
 	new_resource.updated_by_last_action(false)
 
-	template "#{node['phpmyadmin']['home']}/conf.d/#{new_resource.name.downcase.gsub(' ','_')}.inc.php" do
+	a = template "#{node['phpmyadmin']['home']}/conf.d/#{new_resource.name.downcase.gsub(' ','_')}.inc.php" do
 		cookbook 'phpmyadmin'
 		source 'dbinstance.inc.php.erb'
 		owner node['phpmyadmin']['user']
@@ -41,28 +41,18 @@ action :create do
 		mode 00644
 	end
 
-	ruby_block "phpmyadmin-create-profile-#{new_resource.name}" do
-		block do
-			new_resource.updated_by_last_action(true)
-		end
-		action :nothing
-		subscribes :create, "template[#{node['phpmyadmin']['home']}/conf.d/#{new_resource.name.downcase.gsub(' ','_')}.inc.php]"
-	end	
+	new_resource.updated_by_last_action(a.updated_by_last_action?)
+
 end
 
 action :delete do
 	Chef::Log.info("Removing PHPMyAdmin database profile for: #{new_resource.name}")
 	new_resource.updated_by_last_action(false)
 
-	file "#{node['phpmyadmin']['home']}/conf.d/#{new_resource.name.downcase.gsub(' ','_')}.inc.php" do
+	a = file "#{node['phpmyadmin']['home']}/conf.d/#{new_resource.name.downcase.gsub(' ','_')}.inc.php" do
 		action :delete
 	end
+
+	new_resource.updated_by_last_action(a.updated_by_last_action?)
 	
-	ruby_block "phpmyadmin-remove-profile-#{new_resource.name}" do
-		block do
-			new_resource.updated_by_last_action(true)
-		end
-		action :nothing
-		subscribes :create, "file[#{node['phpmyadmin']['home']}/conf.d/#{new_resource.name.downcase.gsub(' ','_')}.inc.php]"
-	end	
 end

@@ -21,7 +21,7 @@ action :create do
 	Chef::Log.info("Creating PHPMyAdmin control database for: #{new_resource.name}")
 	new_resource.updated_by_last_action(false)
 
-	template "#{Chef::Config['file_cache_path']}/phpmyadmin-#{new_resource.host}.sql" do
+	a = template "#{Chef::Config['file_cache_path']}/phpmyadmin-#{new_resource.host}.sql" do
 		cookbook 'phpmyadmin'
 		source 'phpmyadmin.sql.erb'
 		owner 'root'
@@ -36,7 +36,7 @@ action :create do
 		notifies :run, "execute[create-pma-database-for-#{new_resource.name}]"
 	end
 	
-	execute "create-pma-database-for-#{new_resource.name}" do
+	b = execute "create-pma-database-for-#{new_resource.name}" do
 		user 'root'
 		group 'root'
 		cwd Chef::Config['file_cache_path']
@@ -44,37 +44,27 @@ action :create do
 		action :nothing
 	end
 
-	ruby_block "phpmyadmin-create-control-#{new_resource.name}" do
-		block do
-			new_resource.updated_by_last_action(true)
-		end
-		action :nothing
-		subscribes :create, "execute[create-pma-database-for-#{new_resource.name}]"
-	end	
+	new_resource.updated_by_last_action(a.updated_by_last_action? || b.updated_by_last_action?)
+
 end
 
 action :delete do
 	Chef::Log.info("Removing PHPMyAdmin control database for: #{new_resource.name}")
 	new_resource.updated_by_last_action(false)
 
-	execute "drop-pma-user-for-#{new_resource.name}" do
+	a = execute "drop-pma-user-for-#{new_resource.name}" do
 		command %Q{ mysql -u'#{new_resource.root_username}' -p'#{new_resource.root_password}' -h '#{new_resource.host}' -P#{new_resource.port} -e 'DELETE FROM `mysql`.`user` WHERE `User` = "#{new_resource.pma_username}"' }
 		not_if %Q{ mysql -u'#{new_resource.root_username}' -p'#{new_resource.root_password}' -h '#{new_resource.host}' -P#{new_resource.port} -e 'SHOW GRANTS FOR "#{new_resource.pma_username}"@"%"' }
 		action :run
 		notifies :run, "execute[drop-pma-database-for-#{new_resource.name}]"
 	end
 
-	execute "drop-pma-database-for-#{new_resource.name}" do
+	b = execute "drop-pma-database-for-#{new_resource.name}" do
 		command %Q{ mysql -u'#{new_resource.root_username}' -p'#{new_resource.root_password}' -h '#{new_resource.host}' -P#{new_resource.port} -e 'DROP DATABASE #{new_resource.pma_database}' }
 		not_if %Q{ mysql -u'#{new_resource.root_username}' -p'#{new_resource.root_password}' -h '#{new_resource.host}' -P#{new_resource.port} -e 'SHOW DATABASES LIKE "#{new_resource.pma_database}"' }
 		action :nothing
 	end
 
-	ruby_block "phpmyadmin-remove-control-#{new_resource.name}" do
-		block do
-			new_resource.updated_by_last_action(true)
-		end
-		action :nothing
-		subscribes :create, "execute[drop-pma-database-for-#{new_resource.name}]"
-	end	
+	new_resource.updated_by_last_action(a.updated_by_last_action? || b.updated_by_last_action?)
+
 end

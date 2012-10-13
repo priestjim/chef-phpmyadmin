@@ -1,3 +1,4 @@
+
 chef-phpmyadmin
 ===============
 
@@ -53,6 +54,7 @@ This cookbook supports the following attributes:
 * `maxrows`: The maximum rows PMA shall display in a table view
 * `protect_binary`: Define the binary field protection PMA will be using
 * `default_lang`: The default language PMA will be using
+* `default_display`: The default display of rows inside PMA
 * `query_history`: Enable or disable the Javascript query history
 * `query_history_size`: Set the maximum size of the Javascript query history
 
