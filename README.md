@@ -1,4 +1,3 @@
-
 chef-phpmyadmin
 ===============
 
