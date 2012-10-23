@@ -37,14 +37,12 @@ user user do
 	supports :manage_home => true 
 end
 
-[ home, "#{home}/conf.d" ].each do |dir|
-	directory dir do
-		owner user
-		group group
-		mode 00755
-		recursive true
-		action :create
-	end
+directory home do
+	owner user
+	group group
+	mode 00755
+	recursive true
+	action :create
 end
 
 [ node['phpmyadmin']['upload_dir'], node['phpmyadmin']['save_dir'] ].each do |dir|
@@ -77,6 +75,14 @@ bash "extract-php-myadmin" do
 		rmdir phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages
 	EOH
 	not_if { ::File.exists?("#{home}/RELEASE-DATE-#{node['phpmyadmin']['version']}")}
+end
+
+directory "#{home}/conf.d" do
+	owner user
+	group group
+	mode 00755
+	recursive true
+	action :create
 end
 
 # Blowfish Secret
