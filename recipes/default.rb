@@ -60,6 +60,7 @@ remote_file "#{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin'][
   owner user
   group group
   mode 00644
+  action :create_if_missing
   source "#{node['phpmyadmin']['mirror']}/#{node['phpmyadmin']['version']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz"
   checksum node['phpmyadmin']['checksum']
 end
