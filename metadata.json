@@ -33,7 +33,7 @@
     "phpmyadmin/version": {
       "display_name": "PHPMyAdmin version",
       "description": "The desired PMA version",
-      "default": "3.5.2.2",
+      "default": "3.5.3",
       "choice": [
 
       ],
@@ -257,5 +257,5 @@
   },
   "recipes": {
   },
-  "version": "1.0.1"
+  "version": "1.0.2"
 }
