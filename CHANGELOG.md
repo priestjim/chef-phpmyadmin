@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of phpmyadmin.
 
-## 1.0.3
+## 1.0.2
 
 * PMA version bump
 * Updated some default attributes
