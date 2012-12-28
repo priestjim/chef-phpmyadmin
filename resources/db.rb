@@ -30,3 +30,4 @@ attribute :hide_dbs,		:kind_of => [ Array, String ], :default => []
 attribute :pma_username,	:kind_of => String, :default => ''
 attribute :pma_password,	:kind_of => String, :default => ''
 attribute :pma_database,	:kind_of => String, :default => ''
+attribute :auth_type,           :kind_of => String, :default => 'config'
