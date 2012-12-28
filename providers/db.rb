@@ -36,7 +36,8 @@ action :create do
 			:hide_dbs => new_resource.hide_dbs,
 			:pma_user => new_resource.pma_username,
 			:pma_pass => new_resource.pma_password,
-			:pma_db => new_resource.pma_database
+                        :pma_db => new_resource.pma_database,
+                        :auth_type => new_resource.auth_type,
 		})
 		mode 00644
 	end
