@@ -49,7 +49,7 @@ end
 	directory dir do
 		owner "root"
 		group "root"
-		mode 01777
+		mode 01733
 		recursive true
 		action :create
 	end
