@@ -86,6 +86,7 @@ This cookbook defines a phpmyadmin_pmadb LWRP for dynamically defining the contr
 * `pma_database`: This is the name of the PMA control database.
 * `pma_username`: The PMA control database username
 * `pma_password`: The PMA control database password
+* `auth_type`: The authentication method PMA will use
 
 Usage
 =====

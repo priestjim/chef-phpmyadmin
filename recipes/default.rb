@@ -96,7 +96,7 @@ template "#{home}/config.inc.php" do
 	mode 00644
 end
 
-if ((defined?(node['phpmyadmin']['fpm'])) && (node['phpmyadmin']['fpm']))
+if (node['phpmyadmin'].attribute?('fpm') && node['phpmyadmin']['fpm'])
  	php_fpm 'phpmyadmin' do
 	  action :add
 	  user user
