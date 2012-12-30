@@ -73,7 +73,7 @@ bash "extract-php-myadmin" do
 		rm -fr *
 		tar xzf #{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz
 		mv phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages/* #{home}/
-		rmdir phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages
+		rm -fr phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages
 	EOH
 	not_if { ::File.exists?("#{home}/RELEASE-DATE-#{node['phpmyadmin']['version']}")}
 end
