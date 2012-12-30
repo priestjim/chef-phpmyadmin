@@ -3,7 +3,7 @@ maintainer_email "pj@ezgr.net"
 license          "Apache Public License 2.0"
 description      "Installs/Configures PHPMyAdmin"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "1.0.3"
+version          "1.0.4"
 
 depends "php"
 
@@ -20,12 +20,12 @@ end
 attribute "phpmyadmin/version",
   :display_name => "PHPMyAdmin version",
   :description => "The desired PMA version",
-  :default => "3.5.3"
+  :default => "3.5.5"
 
 attribute "phpmyadmin/checksum",
   :display_name => "PHPMyAdmin archive checksum",
   :description => "The sha256 checksum of the PMA desired version",
-  :default => "eb00856d167ff7027e5e5ef4a88c4013f7b8bb598eea9789a12edf265a960921"
+  :default => "1898197c7f1e45e5f12bc3491a848e1e827b43f3321981dd0b9848afa44f3010"
 
 attribute "phpmyadmin/mirror",
   :display_name => "PHPMyAdmin download mirror",
