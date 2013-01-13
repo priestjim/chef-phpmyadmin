@@ -37,9 +37,9 @@ action :create do
 			:pma_user => new_resource.pma_username,
 			:pma_pass => new_resource.pma_password,
 	        :pma_db => new_resource.pma_database,
-	        :auth_type => new_resource.auth_type,
+	        :auth_type => new_resource.auth_type
 		})
-		mode 00644
+		mode 00640
 	end
 
 	new_resource.updated_by_last_action(a.updated_by_last_action?)
