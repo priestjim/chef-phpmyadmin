@@ -48,7 +48,7 @@ end
 directory node['phpmyadmin']['upload_dir'] do
 	owner 'root'
 	group 'root'
-	mode 01733
+	mode 01777
 	recursive true
 	action :create
 end
