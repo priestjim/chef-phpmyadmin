@@ -4,14 +4,14 @@
 #
 # Copyright 2012, Panagiotis Papadomitsos
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an 'AS IS' BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -45,15 +45,21 @@ directory home do
 	action :create
 end
 
-[ node['phpmyadmin']['upload_dir'], node['phpmyadmin']['save_dir'] ].each do |dir|
-	directory dir do
-		owner "root"
-		group "root"
-		mode 01733
-		recursive true
-		action :create
-	end
-end	
+directory node['phpmyadmin']['upload_dir'] do
+	owner 'root'
+	group 'root'
+	mode 01733
+	recursive true
+	action :create
+end
+
+directory node['phpmyadmin']['save_dir'] do
+	owner 'root'
+	group 'root'
+	mode 01777
+	recursive true
+	action :create
+end
 
 # Download the selected PHPMyAdmin archive
 remote_file "#{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz" do
@@ -65,7 +71,7 @@ remote_file "#{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin'][
   checksum node['phpmyadmin']['checksum']
 end
 
-bash "extract-php-myadmin" do
+bash 'extract-php-myadmin' do
 	user user
 	group group
 	cwd home
@@ -103,7 +109,7 @@ if (node['phpmyadmin'].attribute?('fpm') && node['phpmyadmin']['fpm'])
 	  group group
 	  socket true
 	  socket_path node['phpmyadmin']['socket']
-	  socket_perms "0666"
+	  socket_perms '0666'
 	  start_servers 2
 	  min_spare_servers 2
 	  max_spare_servers 8
