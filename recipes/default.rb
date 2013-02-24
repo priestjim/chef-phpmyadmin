@@ -93,8 +93,11 @@ directory "#{home}/conf.d" do
 end
 
 # Blowfish Secret
-node.set_unless['phpmyadmin']['blowfish_secret'] = Digest::SHA1.hexdigest(IO.read('/dev/urandom', 2048))
-node.save
+unless node[:phpmyadmin][:blowfish_secret]
+  node.set['phpmyadmin']['blowfish_secret'] = Digest::SHA1.hexdigest(IO.read('/dev/urandom', 2048))
+  node.save
+end
+
 template "#{home}/config.inc.php" do
 	source 'config.inc.php.erb'
 	owner user
