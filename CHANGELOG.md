@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of phpmyadmin.
 
+## 1.0.4
+
+* PMA version bump
+* Fix for node save in order to run on chef-solo runs (credit: Ivan Tanev)
+* Updated the upload directory permissions with more secure ones
+* Othe small fixes here and there
+
 ## 1.0.2
 
 * PMA version bump
