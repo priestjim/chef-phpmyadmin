@@ -20,13 +20,11 @@ end
 
 attribute "phpmyadmin/version",
   :display_name => "PHPMyAdmin version",
-  :description => "The desired PMA version",
-  :default => "3.5.5"
+  :description => "The desired PMA version"
 
 attribute "phpmyadmin/checksum",
   :display_name => "PHPMyAdmin archive checksum",
-  :description => "The sha256 checksum of the PMA desired version",
-  :default => "1898197c7f1e45e5f12bc3491a848e1e827b43f3321981dd0b9848afa44f3010"
+  :description => "The sha256 checksum of the PMA desired version"
 
 attribute "phpmyadmin/mirror",
   :display_name => "PHPMyAdmin download mirror",
