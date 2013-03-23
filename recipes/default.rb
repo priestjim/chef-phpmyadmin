@@ -112,6 +112,8 @@ if (node['phpmyadmin'].attribute?('fpm') && node['phpmyadmin']['fpm'])
 	  group group
 	  socket true
 	  socket_path node['phpmyadmin']['socket']
+	  socket_user user
+	  socket_group group
 	  socket_perms '0666'
 	  start_servers 2
 	  min_spare_servers 2
