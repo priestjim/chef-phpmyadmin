@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of phpmyadmin.
 
+## 1.0.5
+
+* PMA major version bump in the 4.x series
+* Fixed mirror string
+
 ## 1.0.4
 
 * PMA version bump

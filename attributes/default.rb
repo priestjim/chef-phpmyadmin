@@ -17,9 +17,9 @@
 # limitations under the License.
 #
 
-default['phpmyadmin']['version'] = '3.5.8.1'
-default['phpmyadmin']['checksum'] = '9768b9c429e6b99dcbe55b61fac4d28a8cdb18427b3f6ad30b15a93cc2173fb5'
-default['phpmyadmin']['mirror'] = 'http://netcologne.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin'
+default['phpmyadmin']['version'] = '4.0.3'
+default['phpmyadmin']['checksum'] = 'a06c6b7cde524bc4ff4f458e769b6ef3c07918d9951131d6ece3f843d8aadda3'
+default['phpmyadmin']['mirror'] = 'http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin'
 
 default['phpmyadmin']['fpm'] = true
 
