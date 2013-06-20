@@ -28,11 +28,15 @@ default['phpmyadmin']['user'] = 'phpmyadmin'
 default['phpmyadmin']['group'] = 'phpmyadmin'
 default['phpmyadmin']['socket'] = '/tmp/phpmyadmin.sock'
 
-case node['platform']
-when 'ubuntu', 'debian'
+if Chef::Config[:solo]
+  default['phpmyadmin']['blowfish_secret'] = '7654588cf9f0f92f01a6aa361d02c0cf038'
+end
+
+case node['platform_family']
+when 'debian'
 	default['phpmyadmin']['upload_dir'] = '/var/lib/php5/uploads'
 	default['phpmyadmin']['save_dir'] = '/var/lib/php5/uploads'
-when 'centos', 'redhat'
+when 'rhel'
 	default['phpmyadmin']['upload_dir'] = '/var/lib/php/uploads'
 	default['phpmyadmin']['save_dir'] = '/var/lib/php/uploads'
 end	

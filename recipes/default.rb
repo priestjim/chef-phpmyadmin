@@ -92,8 +92,8 @@ directory "#{home}/conf.d" do
 	action :create
 end
 
-# Blowfish Secret
-unless node[:phpmyadmin][:blowfish_secret]
+# Blowfish Secret - set it statically when running on Chef Solo via attribute
+unless Chef::Config[:solo] || node['phpmyadmin']['blowfish_secret']
   node.set['phpmyadmin']['blowfish_secret'] = Digest::SHA1.hexdigest(IO.read('/dev/urandom', 2048))
   node.save
 end
