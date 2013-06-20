@@ -4,7 +4,7 @@ maintainer_email 'pj@ezgr.net'
 license          'Apache Public License 2.0'
 description      'Installs/Configures PHPMyAdmin'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '1.0.5'
+version          '1.0.6'
 
 depends 'php'
 
@@ -50,6 +50,11 @@ attribute 'phpmyadmin/group',
   :display_name => 'PHPMyAdmin group',
   :description => 'The group PMA runs as',
   :default => 'phpmyadmin'
+
+attribute 'phpmyadmin/blowfish_secret',
+  :display_name => 'PHPMyAdmin blowfish secret',
+  :description => 'The encryption key for PHPMyAdmin',
+  :default => '7654588cf9f0f92f01a6aa361d02c0cf038'
 
 attribute 'phpmyadmin/socket',
   :display_name => 'PHPMyAdmin FPM socket',
