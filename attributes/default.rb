@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-default['phpmyadmin']['version'] = '4.0.6'
-default['phpmyadmin']['checksum'] = 'b7adf5c7a4366168fa1d921ab9920f33c604a5c3d1039a91785892457f00f47f'
+default['phpmyadmin']['version'] = '4.0.8'
+default['phpmyadmin']['checksum'] = '7c00d28af02c45d68bacac53fc23ebcfd180b4959f9933422f35015c2091030b'
 default['phpmyadmin']['mirror'] = 'http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin'
 
 default['phpmyadmin']['fpm'] = true
@@ -34,12 +34,12 @@ end
 
 case node['platform_family']
 when 'debian'
-	default['phpmyadmin']['upload_dir'] = '/var/lib/php5/uploads'
-	default['phpmyadmin']['save_dir'] = '/var/lib/php5/uploads'
+  default['phpmyadmin']['upload_dir'] = '/var/lib/php5/uploads'
+  default['phpmyadmin']['save_dir'] = '/var/lib/php5/uploads'
 when 'rhel'
-	default['phpmyadmin']['upload_dir'] = '/var/lib/php/uploads'
-	default['phpmyadmin']['save_dir'] = '/var/lib/php/uploads'
-end	
+  default['phpmyadmin']['upload_dir'] = '/var/lib/php/uploads'
+  default['phpmyadmin']['save_dir'] = '/var/lib/php/uploads'
+end 
 default['phpmyadmin']['maxrows'] = 100
 default['phpmyadmin']['protect_binary'] = 'blob'
 default['phpmyadmin']['default_lang'] = 'en'

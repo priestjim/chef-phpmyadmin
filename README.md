@@ -9,6 +9,9 @@ You can clone it and import it to Chef as
 	git clone git://github.com/priestjim/chef-phpmyadmin.git phpmyadmin
 	knife cookbook upload phpmyadmin
 
+The latest and greatest revision of this cookbook will always be available
+at https://github.com/priestjim/chef-phpmyadmin
+
 Requirements
 ============
 
