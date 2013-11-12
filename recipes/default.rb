@@ -19,6 +19,13 @@
 
 require 'digest/sha1'
 
+# PHP Recipe includes we already know PHPMyAdmin needs
+include_recipe 'php'
+include_recipe 'php::module_mbstring'
+include_recipe 'php::module_mcrypt'
+include_recipe 'php::module_gd'
+include_recipe 'php::module_mysql'
+
 home = node['phpmyadmin']['home']
 user = node['phpmyadmin']['user']
 group = node['phpmyadmin']['group']

@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-default['phpmyadmin']['version'] = '4.0.8'
-default['phpmyadmin']['checksum'] = '7c00d28af02c45d68bacac53fc23ebcfd180b4959f9933422f35015c2091030b'
+default['phpmyadmin']['version'] = '4.0.9'
+default['phpmyadmin']['checksum'] = 'e7d22f3af3e0e363a6330f464a5f1cdd76f20bc5bcf0f980585d517c1ea4a80d'
 default['phpmyadmin']['mirror'] = 'http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin'
 
 default['phpmyadmin']['fpm'] = true
