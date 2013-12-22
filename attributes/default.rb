@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-default['phpmyadmin']['version'] = '4.0.9'
-default['phpmyadmin']['checksum'] = 'e7d22f3af3e0e363a6330f464a5f1cdd76f20bc5bcf0f980585d517c1ea4a80d'
+default['phpmyadmin']['version'] = '4.1.1'
+default['phpmyadmin']['checksum'] = '098ffaab0199f8bf88c98a42ca906af34b66b35820d2919f865e5b05d10602b2'
 default['phpmyadmin']['mirror'] = 'http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin'
 
 default['phpmyadmin']['fpm'] = true
@@ -39,7 +39,7 @@ when 'debian'
 when 'rhel'
   default['phpmyadmin']['upload_dir'] = '/var/lib/php/uploads'
   default['phpmyadmin']['save_dir'] = '/var/lib/php/uploads'
-end 
+end
 default['phpmyadmin']['maxrows'] = 100
 default['phpmyadmin']['protect_binary'] = 'blob'
 default['phpmyadmin']['default_lang'] = 'en'
