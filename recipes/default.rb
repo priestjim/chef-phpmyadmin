@@ -75,7 +75,7 @@ remote_file "#{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin'][
   mode 00644
 	retries 3
 	retry_delay 2
-  action :create_if_missing
+  action :create
   source "#{node['phpmyadmin']['mirror']}/#{node['phpmyadmin']['version']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz"
   checksum node['phpmyadmin']['checksum']
 end
