@@ -41,7 +41,7 @@ user user do
 	gid group
 	home home
 	shell '/usr/sbin/nologin'
-	supports :manage_home => true 
+	supports :manage_home => true
 end
 
 directory home do
@@ -73,6 +73,8 @@ remote_file "#{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin'][
   owner user
   group group
   mode 00644
+	retries 3
+	retry_delay 2
   action :create_if_missing
   source "#{node['phpmyadmin']['mirror']}/#{node['phpmyadmin']['version']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz"
   checksum node['phpmyadmin']['checksum']
@@ -127,7 +129,7 @@ if (node['phpmyadmin'].attribute?('fpm') && node['phpmyadmin']['fpm'])
 	  max_spare_servers 8
 	  max_children 8
 	  terminate_timeout (node['php']['ini_settings']['max_execution_time'].to_i + 20)
-	  value_overrides({ 
+	  value_overrides({
 	    :error_log => "#{node['php']['fpm_log_dir']}/phpmyadmin.log"
 	  })
 	end
