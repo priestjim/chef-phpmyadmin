@@ -19,6 +19,12 @@
 
 require 'digest/sha1'
 
+# PHP Recipe includes we already know PHPMyAdmin needs
+include_recipe 'php'
+include_recipe 'php::module_mcrypt'
+include_recipe 'php::module_gd'
+include_recipe 'php::module_mysql'
+
 home = node['phpmyadmin']['home']
 user = node['phpmyadmin']['user']
 group = node['phpmyadmin']['group']
@@ -34,7 +40,7 @@ user user do
 	gid group
 	home home
 	shell '/usr/sbin/nologin'
-	supports :manage_home => true 
+	supports :manage_home => true
 end
 
 directory home do
@@ -66,7 +72,9 @@ remote_file "#{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin'][
   owner user
   group group
   mode 00644
-  action :create_if_missing
+       retries 5
+       retry_delay 2
+  action :create
   source "#{node['phpmyadmin']['mirror']}/#{node['phpmyadmin']['version']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz"
   checksum node['phpmyadmin']['checksum']
 end
@@ -104,24 +112,3 @@ template "#{home}/config.inc.php" do
 	group group
 	mode 00644
 end
-
-#if (node['phpmyadmin'].attribute?('fpm') && node['phpmyadmin']['fpm'])
-# 	php_fpm 'phpmyadmin' do
-#	  action :add
-#	  user user
-#	  group group
-#	  socket true
-#	  socket_path node['phpmyadmin']['socket']
-#	  socket_user user
-#	  socket_group group
-#	  socket_perms '0666'
-#	  start_servers 2
-#	  min_spare_servers 2
-#	  max_spare_servers 8
-#	  max_children 8
-#	  terminate_timeout (node['php']['ini_settings']['max_execution_time'].to_i + 20)
-#	  value_overrides({ 
-#	    :error_log => "#{node['php']['fpm_log_dir']}/phpmyadmin.log"
-#	  })
-#	end
-#end
