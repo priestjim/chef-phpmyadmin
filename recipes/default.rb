@@ -72,8 +72,8 @@ remote_file "#{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin'][
   owner user
   group group
   mode 00644
-       retries 5
-       retry_delay 2
+	retries 5
+	retry_delay 2
   action :create
   source "#{node['phpmyadmin']['mirror']}/#{node['phpmyadmin']['version']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz"
   checksum node['phpmyadmin']['checksum']
