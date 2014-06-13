@@ -21,6 +21,7 @@ require 'digest/sha1'
 
 # PHP Recipe includes we already know PHPMyAdmin needs
 include_recipe 'php'
+include_recipe 'php::module_mbstring'
 include_recipe 'php::module_mcrypt'
 include_recipe 'php::module_gd'
 include_recipe 'php::module_mysql'
@@ -87,7 +88,7 @@ bash 'extract-php-myadmin' do
 		rm -fr *
 		tar xzf #{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz
 		mv phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages/* #{home}/
-		rm -fr phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages*
+		rm -fr phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages
 	EOH
 	not_if { ::File.exists?("#{home}/RELEASE-DATE-#{node['phpmyadmin']['version']}")}
 end
