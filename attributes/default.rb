@@ -20,6 +20,7 @@
 default['phpmyadmin']['version'] = '4.2.5'
 default['phpmyadmin']['checksum'] = '6eaa6f4fd78f8092ecd8df4da10fb0c3f0bd09c390c8c7262d369ae12faa9434'
 default['phpmyadmin']['mirror'] = 'http://downloads.sourceforge.net/project/phpmyadmin/phpMyAdmin'
+default['phpmyadmin']['server_name'] = node['fqdn']
 
 default['phpmyadmin']['fpm'] = true
 
