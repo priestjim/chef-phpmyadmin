@@ -47,3 +47,6 @@ default['phpmyadmin']['default_lang'] = 'en'
 default['phpmyadmin']['default_display'] = 'horizontal'
 default['phpmyadmin']['query_history'] = true
 default['phpmyadmin']['query_history_size'] = 100
+	
+default['phpmyadmin']['config_template'] = 'config.inc.php.erb'
+default['phpmyadmin']['config_template_cookbook'] = 'phpmyadmin'
