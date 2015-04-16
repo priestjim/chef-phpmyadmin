@@ -108,9 +108,10 @@ unless Chef::Config[:solo] || node['phpmyadmin']['blowfish_secret']
 end
 
 template "#{home}/config.inc.php" do
-	source 'config.inc.php.erb'
+	source node['phpmyadmin']['config_template']
 	owner user
 	group group
+	cookbook node['phpmyadmin']['config_template_cookbook']
 	mode 00644
 end
 
