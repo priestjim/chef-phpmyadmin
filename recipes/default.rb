@@ -20,11 +20,29 @@
 require 'digest/sha1'
 
 # PHP Recipe includes we already know PHPMyAdmin needs
-include_recipe 'php'
-include_recipe 'php::module_mbstring'
-include_recipe 'php::module_mcrypt'
-include_recipe 'php::module_gd'
-include_recipe 'php::module_mysql'
+if node['phpmyadmin']['stand_alone'] then
+	include_recipe 'php'
+	include_recipe 'php::module_mbstring'
+	include_recipe 'php::module_mcrypt'
+	include_recipe 'php::module_gd'
+	include_recipe 'php::module_mysql'
+
+	directory node['phpmyadmin']['upload_dir'] do
+		owner 'root'
+		group 'root'
+		mode 01777
+		recursive true
+		action :create
+	end
+
+	directory node['phpmyadmin']['save_dir'] do
+		owner 'root'
+		group 'root'
+		mode 01777
+		recursive true
+		action :create
+	end
+end
 
 home = node['phpmyadmin']['home']
 user = node['phpmyadmin']['user']
@@ -48,22 +66,6 @@ directory home do
 	owner user
 	group group
 	mode 00755
-	recursive true
-	action :create
-end
-
-directory node['phpmyadmin']['upload_dir'] do
-	owner 'root'
-	group 'root'
-	mode 01777
-	recursive true
-	action :create
-end
-
-directory node['phpmyadmin']['save_dir'] do
-	owner 'root'
-	group 'root'
-	mode 01777
 	recursive true
 	action :create
 end
