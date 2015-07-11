@@ -51,3 +51,6 @@ default['phpmyadmin']['query_history_size'] = 100
 
 default['phpmyadmin']['config_template'] = 'config.inc.php.erb'
 default['phpmyadmin']['config_template_cookbook'] = 'phpmyadmin'
+
+default['phpmyadmin']['force_ssl'] = false
+
