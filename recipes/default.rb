@@ -17,6 +17,7 @@
 # limitations under the License.
 #
 
+require 'etc'
 require 'digest/sha1'
 
 # PHP Recipe includes we already know PHPMyAdmin needs
@@ -60,6 +61,7 @@ user user do
 	home home
 	shell '/usr/sbin/nologin'
 	supports :manage_home => true
+	not_if { (! Etc.getpwnam(user).gecos.eql?('PHPMyAdmin User')) rescue false }
 end
 
 directory home do
