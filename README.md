@@ -64,6 +64,7 @@ This cookbook supports the following attributes:
 * `default_display`: The default display of rows inside PMA
 * `query_history`: Enable or disable the Javascript query history
 * `query_history_size`: Set the maximum size of the Javascript query history
+* `check_config_permissions`: Enable or disable invalid PMA directory permission warnings for development
 * `force_ssl`: Enable or disable SSL force
 
 LWRP Methods

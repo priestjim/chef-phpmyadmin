@@ -32,6 +32,8 @@ $cfg['Servers'][$i]['bs_temp_log_threshold'] = '32M';
 
 <% unless @pma_user.empty? || @pma_pass.empty? || @pma_db.empty? %>
 /* User for advanced features */
+$cfg['Servers'][$i]['controlhost']      = '<%= @host %>';
+$cfg['Servers'][$i]['controlport']      = '<%= @port %>';
 $cfg['Servers'][$i]['controluser']      = '<%= @pma_user %>';
 $cfg['Servers'][$i]['controlpass']      = '<%= @pma_pass %>';
 $cfg['Servers'][$i]['pmadb']            = '<%= @pma_db %>';

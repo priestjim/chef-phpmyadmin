@@ -27,7 +27,7 @@ foreach(glob('<%= node['phpmyadmin']['home'] %>/conf.d/*.inc.php', GLOB_NOSORT) 
  */
 $cfg['UploadDir'] = '<%= node['phpmyadmin']['upload_dir'] %>';
 $cfg['SaveDir'] = '<%= node['phpmyadmin']['save_dir'] %>';
-
+$cfg['CheckConfigurationPermissions'] = <%= node['phpmyadmin']['check_config_permissions'] %>;
 $cfg['SuhosinDisableWarning'] = true;
 
 /**
@@ -36,6 +36,12 @@ $cfg['SuhosinDisableWarning'] = true;
  * default = false
  */
 $cfg['ShowAll'] = true;
+
+/**
+ * Whether to display icons or text or both icons and text in table row
+ * action segment. Value can be either of 'icons', 'text' or 'both'.
+ */
+$cfg['RowActionType'] = 'both';
 
 /**
  * Number of rows displayed when browsing a result set. If the result
@@ -101,6 +107,13 @@ $cfg['QueryHistoryMax'] = <%= node['phpmyadmin']['query_history_size'] %>;
  * setting this to true is not supported.
 */
 $cfg['ForceSSL'] = <%= node['phpmyadmin']['force_ssl'] %>;
+
+/**
+ * Should error reporting be enabled for JavaScript errors
+ *
+ * default = 'ask'
+ */
+$cfg['SendErrorReports'] = 'ask';
 
 /*
  * You can find more configuration options in Documentation.html

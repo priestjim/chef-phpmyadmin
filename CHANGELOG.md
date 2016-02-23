@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of phpmyadmin.
 
+## 1.0.8
+
+* Version bump
+* Config update
+
 ## 1.0.7
 
 * Version bump
