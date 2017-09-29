@@ -60,7 +60,7 @@ user user do
 	gid group
 	home home
 	shell '/usr/sbin/nologin'
-	supports :manage_home => true
+	manage_home true
 	not_if { (! Etc.getpwnam(user).gecos.eql?('PHPMyAdmin User')) rescue false }
 end
 
