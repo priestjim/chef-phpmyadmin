@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of phpmyadmin.
 
+## 1.0.9
+
+* Version bump
+* Update to support Chef 13
+
 ## 1.0.8
 
 * Version bump
