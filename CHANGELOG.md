@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of phpmyadmin.
 
+## 1.0.10
+
+* Version bump
+* Update to fix warning message for deprecated node.set
+
 ## 1.0.9
 
 * Version bump

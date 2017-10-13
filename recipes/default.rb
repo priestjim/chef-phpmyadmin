@@ -107,7 +107,7 @@ end
 
 # Blowfish Secret - set it statically when running on Chef Solo via attribute
 unless Chef::Config[:solo] || node['phpmyadmin']['blowfish_secret']
-  node.set['phpmyadmin']['blowfish_secret'] = Digest::SHA1.hexdigest(IO.read('/dev/urandom', 2048))
+  node.override['phpmyadmin']['blowfish_secret'] = Digest::SHA1.hexdigest(IO.read('/dev/urandom', 2048))
   node.save
 end
 
